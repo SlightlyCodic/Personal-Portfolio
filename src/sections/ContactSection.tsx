@@ -70,7 +70,7 @@ export function ContactSection() {
       <div className="flex gap-5 items-center flex-wrap justify-center">
         <a
           href="#"
-          data-cal-link="15min"
+          data-cal-link="chirag-joshi-g8bppf/15min"
           data-cal-namespace="15min"
           data-cal-config='{"layout":"month_view"}'
           className="animated-border relative inline-flex items-center justify-center gap-2.5 px-6 py-3 bg-[var(--bg-color)] text-[var(--text-color)] border border-transparent rounded text-[15px] font-medium no-underline transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden
