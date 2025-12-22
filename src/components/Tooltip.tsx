@@ -77,8 +77,6 @@ export function TooltipProvider() {
     };
   }, [tooltip.visible, updatePosition]);
 
-  const theme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
-
   return createPortal(
     <div
       ref={containerRef}
