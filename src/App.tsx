@@ -8,6 +8,7 @@ import { Footer } from './components/Footer';
 import { HeroSection } from './sections/HeroSection';
 import { ActivitySection } from './sections/ActivitySection';
 import { ProjectsSection } from './sections/ProjectsSection';
+import { CertificationsSection } from './sections/CertificationsSection';
 import { StackSection } from './sections/StackSection';
 import { ContactSection } from './sections/ContactSection';
 
@@ -24,6 +25,7 @@ function App() {
             <HeroSection />
             <ActivitySection />
             <ProjectsSection />
+            <CertificationsSection />
             <StackSection />
             <ContactSection />
           </main>
