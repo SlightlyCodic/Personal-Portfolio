@@ -5,14 +5,14 @@ import { SparklesSection } from '../components/SparklesSection';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDOxmydsSlH38n_azv2E_uQlKgkRHqQb60",
-  authDomain: "protfolio-web-114ac.firebaseapp.com",
-  databaseURL: "https://protfolio-web-114ac-default-rtdb.firebaseio.com/",
-  projectId: "protfolio-web-114ac",
-  storageBucket: "protfolio-web-114ac.appspot.com",
-  messagingSenderId: "902889170627",
-  appId: "1:902889170627:web:36871543c6fbe5af3c6476",
-  measurementId: "G-E1HHJVKCQ5",
+  apiKey: "AIzaSyDpvOhKUDaKJ9SN8mzrkkVwWNoJNOito5g",
+  authDomain: "personal-portfolio-14dec.firebaseapp.com",
+  databaseURL: "https://personal-portfolio-14dec-default-rtdb.firebaseio.com",
+  projectId: "personal-portfolio-14dec",
+  storageBucket: "personal-portfolio-14dec.firebasestorage.app",
+  messagingSenderId: "1051844291340",
+  appId: "1:1051844291340:web:2e52aed1e935792146b729",
+  measurementId: "G-J9G6TE91TB"
 };
 
 // Initialize Firebase
