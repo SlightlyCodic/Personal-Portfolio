@@ -1,0 +1,678 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* CSS Variables - Dark Theme (Default) */
+:root {
+  --background: #071124;
+  --background-2: #041022;
+  --text-color: #f7fbfc;
+  --text-muted: #9aa6af;
+  --border-color: #12303d;
+  --edge: color-mix(in srgb, var(--border-color) 80%, var(--background));
+  --card-bg: #07142a;
+  --bg-color: linear-gradient(180deg, var(--background) 0%, var(--background-2) 100%);
+  --hero-text: var(--text-color);
+  --button-bg: #06b6d4;
+  --button-text: #021014;
+  --accent-color: #06b6d4;
+  --link-color: #06b6d4;
+  --hover-bg-color: #0e3942;
+  --hover-color: #eafafc;
+  --font-sans: 'Poppins', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --overlay: rgba(2, 16, 20, 0.55);
+}
+
+/* Light Theme */
+.light-theme {
+  --background: #ffffff;
+  --text-color: #061016;
+  --text-muted: #6b7280;
+  --border-color: #e6f6f7;
+  --edge: color-mix(in srgb, var(--border-color) 80%, var(--background));
+  --card-bg: #ffffff;
+  --bg-color: var(--background);
+  --hero-text: var(--text-color);
+  --button-bg: #06b6d4;
+  --button-text: #ffffff;
+  --accent-color: #06b6d4;
+  --link-color: #06b6d4;
+  --hover-bg-color: #f0f9fa;
+  --hover-color: #021014;
+  --overlay: rgba(2, 16, 20, 0.12);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  zoom: 0.85;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-color);
+  color: var(--text-color);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@media (min-width: 768px) {
+  body {
+    scroll-snap-type: y proximity;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    scroll-snap-type: none;
+  }
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+/* Theme transition */
+body.theme-transition,
+body.theme-transition * {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  body.theme-transition,
+  body.theme-transition * {
+    transition: none !important;
+  }
+}
+
+/* Side Dashed Lines */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  width: 1px;
+  height: 100vh;
+  border-right: 1px dashed var(--edge);
+  z-index: 9999;
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+body::before {
+  left: calc(50vw - 380px);
+}
+
+body::after {
+  right: calc(50vw - 380px);
+  border-right: none;
+  border-left: 1px dashed var(--edge);
+}
+
+/* Scroll section snap */
+.scroll-section {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* Sparkles Canvas */
+.sparkles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Custom animations */
+@keyframes borderSweep {
+  0% {
+    background-position: 0% 0;
+  }
+
+  100% {
+    background-position: 300% 0;
+  }
+}
+
+@keyframes roleBlurIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(10px) scale(0.98);
+  }
+
+  60% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes roleBlurOut {
+  0% {
+    opacity: 0.9;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+@keyframes shootingStarHeroA {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(620px, 260px);
+    opacity: 0;
+  }
+}
+
+@keyframes shootingStarHeroB {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(540px, -230px);
+    opacity: 0;
+  }
+}
+
+@keyframes shootingStarHeroC {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(590px, 210px);
+    opacity: 0;
+  }
+}
+
+@keyframes shootingStarHeroD {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(520px, -260px);
+    opacity: 0;
+  }
+}
+
+@keyframes shootingStarCard1 {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(500px, 200px);
+    opacity: 0;
+  }
+}
+
+@keyframes shootingStarCard2 {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(480px, -180px);
+    opacity: 0;
+  }
+}
+
+@keyframes shootingStar1 {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(250px, 100px);
+    opacity: 0;
+  }
+}
+
+@keyframes hintFade {
+
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  40% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes arrowPulse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(2px);
+    opacity: 1;
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+
+  75%,
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation classes */
+.role-enter {
+  animation: roleBlurIn 0.55s ease forwards;
+}
+
+.role-exit {
+  animation: roleBlurOut 0.35s ease forwards;
+}
+
+/* Animated border effect */
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  padding: 1px;
+  background: linear-gradient(90deg,
+      rgba(6, 182, 212, 0.12),
+      rgba(6, 182, 212, 0.35),
+      rgba(255, 255, 255, 0.02));
+  background-size: 300% 100%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: borderSweep 5s linear infinite;
+}
+
+.light-theme .animated-border::before {
+  background: linear-gradient(90deg,
+      rgba(3, 37, 40, 0.06),
+      rgba(3, 37, 40, 0.12),
+      rgba(3, 37, 40, 0.04));
+  background-size: 300% 100%;
+}
+
+/* Shooting stars */
+.shooting-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.light-theme .shooting-star {
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+}
+
+.star-1 {
+  top: 15%;
+  left: -50px;
+  animation: shootingStarHeroA 6s ease-in-out infinite;
+}
+
+.star-2 {
+  top: 55%;
+  left: -60px;
+  animation: shootingStarHeroB 7.5s ease-in-out infinite 1.8s;
+}
+
+.star-3 {
+  top: 35%;
+  left: -45px;
+  animation: shootingStarHeroC 8.5s ease-in-out infinite 3.2s;
+}
+
+.star-4 {
+  top: 75%;
+  left: -55px;
+  animation: shootingStarHeroD 9.5s ease-in-out infinite 4.4s;
+}
+
+/* Terminal card shooting stars */
+.terminal-star-1 {
+  top: 30%;
+  left: -30px;
+  animation: shootingStarCard1 7s ease-in-out infinite 3s;
+}
+
+.terminal-star-2 {
+  top: 80%;
+  left: -30px;
+  animation: shootingStarCard2 9s ease-in-out infinite 5s;
+}
+
+/* CLI shooting star */
+.cli-star {
+  width: 2.5px;
+  height: 2.5px;
+  top: 50%;
+  left: -30px;
+  animation: shootingStar1 10s ease-in-out infinite;
+}
+
+/* Current employer indicator */
+.current-indicator::before,
+.current-indicator::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}
+
+.current-indicator::before {
+  background: rgba(6, 182, 212, 0.45);
+  transform: scale(1);
+  animation: ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.current-indicator::after {
+  background: #06b6d4;
+  transform: scale(0.55);
+}
+
+/* Intro Overlay */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 1;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+  zoom: calc(1 / 0.85);
+}
+
+.intro-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-overlay .hello-svg {
+  height: 100px;
+  width: auto;
+  color: var(--text-color);
+}
+
+.intro-overlay .hello-svg path {
+  fill: none;
+  stroke: var(--text-color);
+  stroke-width: 14.8883;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+body.intro-active {
+  overflow: hidden;
+}
+
+body.intro-active main,
+body.intro-active nav {
+  opacity: 0;
+}
+
+/* Dino Game */
+.dino-game-container {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.dino-game-container.fade-in {
+  opacity: 1;
+}
+
+.terminal-card.fade-out {
+  opacity: 0;
+}
+
+#dinoCanvas {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-color);
+  image-rendering: pixelated;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 4px 16px rgba(128, 128, 128, 0.1);
+}
+
+/* Game hint label */
+.game-hint-label {
+  animation: hintFade 4s ease-in-out infinite;
+}
+
+.hint-arrow {
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+/* Position description styling */
+.position-description {
+  margin: 0 0 4px;
+  padding-left: 0;
+  list-style: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.position-description li {
+  position: relative;
+  padding-left: 14px;
+  margin-bottom: 2px;
+}
+
+.position-description li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+}
+
+/* InvoiceGen image positioning */
+.invoicegen-image {
+  object-position: center 40%;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .shooting-star {
+    animation: none;
+    opacity: 0;
+  }
+
+  .game-hint-label {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .animated-border::before {
+    animation: none;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1));
+    background-size: 100% 100%;
+  }
+}
+
+/* Responsive side lines */
+@media (max-width: 1024px) {
+  body::before {
+    left: calc(50vw - 345px);
+  }
+
+  body::after {
+    right: calc(50vw - 345px);
+  }
+}
+
+@media (max-width: 768px) {
+  body::before {
+    left: calc(50vw - 165px);
+  }
+
+  body::after {
+    right: calc(50vw - 165px);
+  }
+
+  .intro-overlay .hello-svg {
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  body::before {
+    left: calc(50vw - 250px);
+  }
+
+  body::after {
+    right: calc(50vw - 250px);
+  }
+
+  .intro-overlay .hello-svg {
+    height: 50px;
+  }
+}
+
+@media (max-width: 360px) {
+  body::before {
+    left: calc(50vw - 205px);
+  }
+
+  body::after {
+    right: calc(50vw - 205px);
+  }
+}
