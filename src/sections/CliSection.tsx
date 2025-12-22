@@ -21,7 +21,6 @@ export function CliSection() {
           Try it:
         </span>
         <code className="font-mono text-sm text-[var(--text-color)] bg-[rgba(128,128,128,0.1)] px-2.5 py-1 rounded tracking-[0.3px] relative z-[1] max-sm:text-[13px] max-sm:px-2 max-sm:py-[3px] max-[480px]:text-xs max-[480px]:px-1.5 max-[480px]:py-0.5">
-          npx tirthh
         </code>
         <button
           onClick={handleCopy}
